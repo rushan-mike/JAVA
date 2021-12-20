@@ -4,7 +4,7 @@ import java.security.spec.*;
 import java.util.Base64;
 import javax.crypto.*;
 
-public class Main {
+public class Decrypt {
 
     public static void main(String[] args) throws IOException{
 
@@ -13,11 +13,12 @@ public class Main {
         String outFile = "C:\\Network\\JAVA\\Code\\secret.txt";
 
         byte[] data = readFromFile(inFile);
+        String contents = new String(data);
 
         byte[] priEncode = readFromFile(priKeyFile);
         String priKey = Base64.getEncoder().encodeToString(priEncode);
 
-        byte[] encryptedData = decrypt(data, priKey);
+        byte[] encryptedData = decrypt(contents, priKey);
         writeToFile(outFile, encryptedData);
 
     }
@@ -37,12 +38,12 @@ public class Main {
     }
 
 
-    public static byte[] decrypt(byte[] data, String PrivateKey){
+    public static byte[] decrypt(String data, String PrivateKey){
 
         try{
             Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.DECRYPT_MODE, getPrivateKey(PrivateKey));
-            return cipher.doFinal(data);
+            return cipher.doFinal(data.getBytes());
         }
         catch (Exception e) {
             e.printStackTrace();
