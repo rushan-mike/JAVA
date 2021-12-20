@@ -1,0 +1,21 @@
+Power Shell ----------------------------------------
+
+javac .\Generate.java
+javac .\Encrypt.java
+javac .\Decrypt.java
+
+java Generate .\public.key .\private.key
+java Encrypt .\public.key .\plain.txt .\cipher.txt
+java Decrypt .\private.key .\cipher.txt .\secret.txt
+
+
+
+Windows CMD ----------------------------------------
+
+javac Generate.java
+javac Encrypt.java
+javac Decrypt.java
+
+java Generate public.key private.key
+java Encrypt public.key plain.txt cipher.txt
+java Decrypt private.key cipher.txt secret.txt

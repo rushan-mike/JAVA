@@ -9,19 +9,20 @@ public class Decrypt {
     public static void main(String[] args) throws IOException{
         int exitCode = 1;
         try {
-            String inFile = args[0];
-            String priKeyFile = args[1];
+            String priKeyFile = args[0];
+            String inFile = args[1];
             String outFile = args[2];
 
-            // String inFile = "C:\\Network\\JAVA\\Code\\cipher.txt";
             // String priKeyFile = "C:\\Network\\JAVA\\Code\\private.key";
+            // String inFile = "C:\\Network\\JAVA\\Code\\cipher.txt";
             // String outFile = "C:\\Network\\JAVA\\Code\\secret.txt";
 
             byte[] data = readFromFile(inFile);
             // String contents = new String(data);
 
             byte[] priEncode = readFromFile(priKeyFile);
-            String priKey = Base64.getEncoder().encodeToString(priEncode);
+            String priKey = new String(priEncode);
+            // String priKey = Base64.getEncoder().encodeToString(priEncode);
 
             byte[] encryptedData = decrypt(data, priKey);
             writeToFile(outFile, encryptedData);

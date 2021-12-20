@@ -25,14 +25,20 @@ public class Generate {
             byte[] pubEncode = publicKey.getEncoded();
             byte[] priEncode = privateKey.getEncoded();
 
-            System.out.println("\nPublicKey : ");
-            System.out.println(Base64.getEncoder().encodeToString(pubEncode));
+            // System.out.println("\nPublicKey : ");
+            // System.out.println(Base64.getEncoder().encodeToString(pubEncode));
 
-            System.out.println("\nPrivateKey : ");
-            System.out.println(Base64.getEncoder().encodeToString(priEncode));
+            // System.out.println("\nPrivateKey : ");
+            // System.out.println(Base64.getEncoder().encodeToString(priEncode));
+
+            String Base64pub = Base64.getEncoder().encodeToString(pubEncode);
+            String Base64pri = Base64.getEncoder().encodeToString(priEncode);
+
+            byte[] pubByte = Base64pub.getBytes();
+            byte[] priByte = Base64pri.getBytes();
             
-            writeToFile(pubKey, pubEncode);
-            writeToFile(priKey, priEncode);
+            writeToFile(pubKey, pubByte);
+            writeToFile(priKey, priByte);
             exitCode = 0;
         }
         
