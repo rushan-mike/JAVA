@@ -7,19 +7,34 @@ import javax.crypto.*;
 public class Decrypt {
 
     public static void main(String[] args) throws IOException{
+        int exitCode = 1;
+        try {
+            String inFile = args[0];
+            String priKeyFile = args[1];
+            String outFile = args[2];
 
-        String inFile = "C:\\Network\\JAVA\\Code\\cipher.txt";
-        String priKeyFile = "C:\\Network\\JAVA\\Code\\private.key";
-        String outFile = "C:\\Network\\JAVA\\Code\\secret.txt";
+            // String inFile = "C:\\Network\\JAVA\\Code\\cipher.txt";
+            // String priKeyFile = "C:\\Network\\JAVA\\Code\\private.key";
+            // String outFile = "C:\\Network\\JAVA\\Code\\secret.txt";
 
-        byte[] data = readFromFile(inFile);
-        String contents = new String(data);
+            byte[] data = readFromFile(inFile);
+            // String contents = new String(data);
 
-        byte[] priEncode = readFromFile(priKeyFile);
-        String priKey = Base64.getEncoder().encodeToString(priEncode);
+            byte[] priEncode = readFromFile(priKeyFile);
+            String priKey = Base64.getEncoder().encodeToString(priEncode);
 
-        byte[] encryptedData = decrypt(contents, priKey);
-        writeToFile(outFile, encryptedData);
+            byte[] encryptedData = decrypt(data, priKey);
+            writeToFile(outFile, encryptedData);
+            exitCode = 0;
+        }
+        
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Format : [key file path] [source file path] [destination file path]");
+        }
+
+        finally {
+            System.exit(exitCode);
+        }
 
     }
 
@@ -38,12 +53,13 @@ public class Decrypt {
     }
 
 
-    public static byte[] decrypt(String data, String PrivateKey){
+    public static byte[] decrypt(byte[] data, String PrivateKey){
 
         try{
             Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.DECRYPT_MODE, getPrivateKey(PrivateKey));
-            return cipher.doFinal(data.getBytes());
+            // return cipher.doFinal(data.getBytes());
+            return cipher.doFinal(data);
         }
         catch (Exception e) {
             e.printStackTrace();

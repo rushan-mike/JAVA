@@ -7,28 +7,42 @@ import java.util.Base64;
 public class Generate {
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
+        int exitCode = 1;
+        try {
+            String pubKey = args[0];
+            String priKey = args[1];
 
-        String pubKey = "C:\\Network\\JAVA\\Code\\public.key";
-        String priKey = "C:\\Network\\JAVA\\Code\\private.key";
+            // String pubKey = "C:\\Network\\JAVA\\Code\\public.key";
+            // String priKey = "C:\\Network\\JAVA\\Code\\private.key";
 
-        KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-        generator.initialize(1024);
-        KeyPair pair = generator.generateKeyPair();
+            KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+            generator.initialize(1024);
+            KeyPair pair = generator.generateKeyPair();
 
-        PublicKey publicKey = pair.getPublic();
-        PrivateKey privateKey = pair.getPrivate(); 
+            PublicKey publicKey = pair.getPublic();
+            PrivateKey privateKey = pair.getPrivate(); 
 
-        byte[] pubEncode = publicKey.getEncoded();
-        byte[] priEncode = privateKey.getEncoded();
+            byte[] pubEncode = publicKey.getEncoded();
+            byte[] priEncode = privateKey.getEncoded();
 
-        System.out.println("\nPublicKey : ");
-        System.out.println(Base64.getEncoder().encodeToString(pubEncode));
+            System.out.println("\nPublicKey : ");
+            System.out.println(Base64.getEncoder().encodeToString(pubEncode));
 
-        System.out.println("\nPrivateKey : ");
-        System.out.println(Base64.getEncoder().encodeToString(priEncode));
+            System.out.println("\nPrivateKey : ");
+            System.out.println(Base64.getEncoder().encodeToString(priEncode));
+            
+            writeToFile(pubKey, pubEncode);
+            writeToFile(priKey, priEncode);
+            exitCode = 0;
+        }
         
-        writeToFile(pubKey, pubEncode);
-        writeToFile(priKey, priEncode);
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Format : [PublicKey file path] [PrivateKey file path]");
+        }
+
+        finally {
+            System.exit(exitCode);
+        }
 
     }
 

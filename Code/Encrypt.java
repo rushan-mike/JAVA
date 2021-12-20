@@ -7,19 +7,34 @@ import javax.crypto.*;
 public class Encrypt {
 
     public static void main(String[] args) throws IOException{
+        int exitCode = 1;
+        try {
+            String inFile = args[0];
+            String pubKeyFile = args[1];
+            String outFile = args[2];
 
-        String inFile = "C:\\Network\\JAVA\\Code\\plain.txt";
-        String pubKeyFile = "C:\\Network\\JAVA\\Code\\public.key";
-        String outFile = "C:\\Network\\JAVA\\Code\\cipher.txt";
+            // String inFile = "C:\\Network\\JAVA\\Code\\plain.txt";
+            // String pubKeyFile = "C:\\Network\\JAVA\\Code\\public.key";
+            // String outFile = "C:\\Network\\JAVA\\Code\\cipher.txt";
 
-        byte[] data = readFromFile(inFile);
-        String contents = new String(data, "UTF-8");
+            byte[] data = readFromFile(inFile);
+            String contents = new String(data, "UTF-8");
 
-        byte[] pubEncode = readFromFile(pubKeyFile);
-        String pubKey = Base64.getEncoder().encodeToString(pubEncode);
+            byte[] pubEncode = readFromFile(pubKeyFile);
+            String pubKey = Base64.getEncoder().encodeToString(pubEncode);
+            
+            byte[] encryptedData = encrypt(contents, pubKey);
+            writeToFile(outFile, encryptedData);
+            exitCode = 0;
+        }
         
-        byte[] encryptedData = encrypt(contents, pubKey);
-        writeToFile(outFile, encryptedData);
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Format : [key file path] [source file path] [destination file path]");
+        }
+
+        finally {
+            System.exit(exitCode);
+        }
 
     }
 
