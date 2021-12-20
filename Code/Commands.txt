@@ -1,4 +1,23 @@
-Power Shell ----------------------------------------
+How to use ------------------------------------------------------------------------
+
+Install PowerShell
+Install JAVA
+Add java path to windows environment variable (google it)
+
+Create a workspace folder (just a folder with a name)
+Create plain.txt and add some text to it
+Copy Generate.java, Encrypt.java, Decrypt.java to the workspace folder
+
+Open powershell and use powershell commands to navigate to the workspace folder (google it)
+Run java --version (just to check)
+Run javac --version (just to check)
+
+Run the "javac" commands to compile the code
+Run the "java" commands to test the code
+
+
+
+Power Shell Commands ------------------------------------------------------------------------
 
 javac .\Generate.java
 javac .\Encrypt.java
@@ -10,7 +29,7 @@ java Decrypt .\private.key .\cipher.txt .\secret.txt
 
 
 
-Windows CMD ----------------------------------------
+Windows CMD Commands (Not working, just for reference) --------------------------------------
 
 javac Generate.java
 javac Encrypt.java
@@ -19,3 +38,17 @@ javac Decrypt.java
 java Generate public.key private.key
 java Encrypt public.key plain.txt cipher.txt
 java Decrypt private.key cipher.txt secret.txt
+
+
+
+Installing PowerShell on Windows ------------------------------------------------------------
+
+Documentation :
+
+https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
+
+Download link :
+
+https://github.com/PowerShell/PowerShell/releases/download/v7.2.1/PowerShell-7.2.1-win-x64.msi
+
+Size : (about) 100MB
